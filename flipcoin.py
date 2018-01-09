@@ -46,10 +46,12 @@ def getFromBitz():
     response = requests.get(Bitz.url)
     js = json.loads(response.content)
     for i in js['data']:
-        if(js[i].split("_")[1] == "btc"):
-            tag = js[i].split("_")[0].upper()
-            sell = js[i]['sell']
-            buy = js[i]['buy']
+        if(i.split("_")[1] == "btc"):
+            tag = i.split("_")[0].upper()
+            sell = js['data'][i]['sell']
+            buy = js['data'][i]['buy']
             Data.reloadCoinValue(tag, 'bitz', sell, buy)
+
+
             
             
