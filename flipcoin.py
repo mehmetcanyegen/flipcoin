@@ -4,9 +4,10 @@ Created on Jan 9, 2018
 @author: mehmetcan
 '''
 
-import Bittrex
+import Bittrex 
 import Poloniex
 import Kucoin
+import Bitz
 import json
 import requests
 import Data
@@ -40,3 +41,15 @@ def getFromKucoin():
             sell = i['sell']
             buy = i['buy']
             Data.reloadCoinValue(tag, 'kucoin', sell, buy)
+
+def getFromBitz():
+    response = requests.get(Bitz.url)
+    js = json.loads(response.content)
+    for i in js['data']:
+        if(js[i].split("_")[1] == "btc"):
+            tag = js[i].split("_")[0].upper()
+            sell = js[i]['sell']
+            buy = js[i]['buy']
+            Data.reloadCoinValue(tag, 'bitz', sell, buy)
+            
+            

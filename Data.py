@@ -3,7 +3,7 @@ Created on Jan 9, 2018
 
 @author: mehmetcan
 '''
-
+ 
 AllCoins = {}
 
 
