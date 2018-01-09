@@ -1,5 +1,7 @@
 # flipcoin
 
+flipcoin is a python wrapper library to connect different crypto coin markets
+
 # usage
 
 ```
