@@ -13,7 +13,7 @@ import requests
 import Data
 
 def getFromBittrex():
-    response = requests.get(Bittrex.url)
+    response = requests.get(Bittrex.tickerUrl)
     js = json.loads(response.content)
     for i in js['result']:
         if(i['MarketName'].split("-")[0] == "BTC"):
@@ -23,7 +23,7 @@ def getFromBittrex():
             Data.reloadCoinValue(tag, 'bittrex', sell, buy)
 
 def getFromPoloniex():
-    response = requests.get(Poloniex.url)
+    response = requests.get(Poloniex.tickerUrl)
     js = json.loads(response.content)
     for i in js:
         if(i.split("_")[0] == "BTC"):
@@ -33,7 +33,7 @@ def getFromPoloniex():
             Data.reloadCoinValue(tag, 'poloniex', sell, buy) 
 
 def getFromKucoin():
-    response = requests.get(Kucoin.url)
+    response = requests.get(Kucoin.tickerUrl)
     js = json.loads(response.content)
     for i in js['data']:
         if(i['symbol'].split("-")[1] == "BTC"):
@@ -43,7 +43,7 @@ def getFromKucoin():
             Data.reloadCoinValue(tag, 'kucoin', sell, buy)
 
 def getFromBitz():
-    response = requests.get(Bitz.url)
+    response = requests.get(Bitz.tickerUrl)
     js = json.loads(response.content)
     for i in js['data']:
         if(i.split("_")[1] == "btc"):
