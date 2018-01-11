@@ -3,7 +3,7 @@ Created on Jan 9, 2018
 
 @author: mehmetcan
 '''
-
+import Hitbtc
 import Bittrex 
 import Poloniex
 import Kucoin
@@ -52,6 +52,16 @@ def getFromBitz():
             buy = js['data'][i]['buy']
             Data.reloadCoinValue(tag, 'bitz', sell, buy)
 
-
+def getFromHitbtc():
+    rpSymbol = requests.get(Hitbtc.symbolUrl)
+    rpTicker = requests.get(Hitbtc.tickerUrl)
+    jsS = json.loads(rpSymbol.content)
+    jsT = json.loads(rpTicker.content)
+    for i in  jsT:
+        for j in jsS:
+            if(j["id"] == i["symbol"]):
+                if(i["ask"] is not None and i["bid"] is not None ):
+                    if(j["quoteCurrency"] == "BTC"):
+                        Data.reloadCoinValue(j["baseCurrency"], "hitbtc", i["ask"], i["bid"])
             
             
