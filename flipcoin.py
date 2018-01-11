@@ -3,6 +3,7 @@ Created on Jan 9, 2018
 
 @author: mehmetcan
 '''
+import Cryptopia
 import Hitbtc
 import Bittrex 
 import Poloniex
@@ -63,5 +64,15 @@ def getFromHitbtc():
                 if(i["ask"] is not None and i["bid"] is not None ):
                     if(j["quoteCurrency"] == "BTC"):
                         Data.reloadCoinValue(j["baseCurrency"], "hitbtc", i["ask"], i["bid"])
+def getFromCryptopia():
+    response = requests.get(Cryptopia.tickerUrl)
+    js = json.loads(response.content)
+    for i in js['Data']:
+        if(i["Label"].split("/")[1] == "BTC"):
+            tag = i["Label"].split("/")[0].upper()
+            sell = i['AskPrice']
+            buy = i['BidPrice']
+            Data.reloadCoinValue(tag, 'cryptopia', sell, buy)
+            
             
             
